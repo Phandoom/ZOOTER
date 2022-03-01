@@ -1,14 +1,11 @@
 import java.sql.SQLException;
 import java.util.Scanner;
-
 import DB.IRepositoryPlayer;
 import DB.RepositoryPlayerDB;
 import models.*;
 import models.Enums.classes;
 import models.Enums.races;
 import models.window.Game;
-import models.window.playerWindow;
-
 
 public class mainProgram {
     static Scanner reader = new Scanner(System.in);

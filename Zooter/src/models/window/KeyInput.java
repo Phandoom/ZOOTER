@@ -34,17 +34,7 @@ public class KeyInput extends KeyAdapter {
             if (tempObject.getId() == ID.Player){
                 if (key == KeyEvent.VK_D) handler.setRight(true);
             }
-            if (tempObject.getId() == ID.Player){
 
-                if (key == KeyEvent.VK_R){
-                    if (!handler.isWT()){
-                        handler.setWT(true);
-                    }
-                    else if (handler.isWT()){
-                        handler.setWT(false);
-                    }
-                }
-            }
         }
 
     }

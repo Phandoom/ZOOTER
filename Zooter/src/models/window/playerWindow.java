@@ -13,7 +13,7 @@ public class playerWindow {
 
         JFrame window = new JFrame("Aetherium");
         window.setVisible(true);
-        window.setResizable(true);
+        window.setResizable(false);
         window.setIconImage(image1.getImage());
         window.setSize(800, 600);
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

@@ -43,6 +43,8 @@ public class Game extends Canvas implements Runnable{
         this.addMouseListener(new MouseInput(handler, camera));
 
         loadLevel(level);
+
+
     }
     private void start(){
         isRunning = true;

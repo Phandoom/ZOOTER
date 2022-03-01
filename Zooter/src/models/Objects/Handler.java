@@ -40,17 +40,6 @@ public class Handler {
         this.right = right;
     }
 
-    public boolean isWT(){
-        return true;
-    }
-    public void setWT(boolean WT){
-            this.WT = WT;
-    }
-
-    public int WeaponMode(){
-    return 0;
-    }
-
     public void tick(){
         for (int i = 0; i < object.size(); i++){
             GameObject tempObject = object.get(i);

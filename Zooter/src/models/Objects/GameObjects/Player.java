@@ -26,11 +26,6 @@ public class Player extends GameObject {
         x += velX;
         y += velY;
 
-
-        //x -= -velX * -1;
-        //y -= -velY * -1;
-
-
         collision();
 
         if (handler.isUp()){
