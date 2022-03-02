@@ -75,7 +75,7 @@ public class Player extends GameObject {
     @Override
     public void render(Graphics g) {
         g.drawImage(player, x, y,null);
-        }
+    }
 
     @Override
     public Rectangle getBounds() {
