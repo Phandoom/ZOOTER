@@ -1,6 +1,7 @@
 import java.io.*;
 import models.Characters;
 import models.Gender;
+import models.Login;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -22,37 +23,51 @@ public class File_Managment {
         String pathAndFilenameC1 = "C:\\Users\\Daniel kopp\\Desktop\\FileManager_Zooter\\Character_Data\\character_1.txt";
         String pathAndFilenameC2 = "C:\\Users\\Daniel kopp\\Desktop\\FileManager_Zooter\\Character_Data\\character_2.txt";
         String pathAndFilenameC3 = "C:\\Users\\Daniel kopp\\Desktop\\FileManager_Zooter\\Character_Data\\character_3.txt";
+        String pathAndFilenameL = "C:\\Users\\Daniel kopp\\Desktop\\FileManager_Zooter\\Login_data\\login_1.txt";
 
-       Characters c1 = new Characters(1, " Arnald ", 12, Gender.male, " Magician");
-       Characters c2 = new Characters(2, " Amalia ", 1, Gender.female, " Archer");
-       Characters c3 = new Characters(3, " Ezecial ", 4.5, Gender.male, " Assasin");
+        Characters c1 = new Characters(1, " Arnald ", 12, Gender.male, " Magician");
+        Characters c2 = new Characters(2, " Amalia ", 1, Gender.female, " Archer");
+        Characters c3 = new Characters(3, " Ezecial ", 4.5, Gender.male, " Assasin");
+
+        Login l = new Login("bkdk", "12345");
 
         System.out.println("\nWrite character data to file: ");
         writeCharactertoFile(c1, pathAndFilenameC1);
         writeCharactertoFile(c2, pathAndFilenameC2);
         writeCharactertoFile(c3, pathAndFilenameC3);
 
+        System.out.println("\nWrite login data to file:  ");
+        writeLoginToFile(l, pathAndFilenameL);
+
         System.out.println("\n\nRead character data from file");
         Characters c_1 = readCharacterFromFile(pathAndFilenameC1);
-        if (c_1 != null){
+        if (c_1 != null) {
             System.out.println(c1);
-        }else {
-            System.out.println("No data available");}
+        } else {
+            System.out.println("No data available");
+        }
         Characters c_2 = readCharacterFromFile(pathAndFilenameC2);
-        if (c_2 != null){
+        if (c_2 != null) {
             System.out.println(c2);
-        }else {
-            System.out.println("No data available");}
+        } else {
+            System.out.println("No data available");
+        }
         Characters c_3 = readCharacterFromFile(pathAndFilenameC3);
-        if (c_3 != null){
+        if (c_3 != null) {
             System.out.println(c3);
-        }else {
-            System.out.println("No data available");}
+        } else {
+            System.out.println("No data available");
+        }
+
+        System.out.println("\n\nRead Login data from file");
+        Login l1 = readLoginFromFile(pathAndFilenameL);
+        if (l1 != null) {
+            System.out.println(l);
+        } else {
+            System.out.println("No data available");
 
 
-
-
-
+        }
     }
 
     private static void writeCharactertoFile(Characters characters, String pathToFile){
@@ -132,6 +147,15 @@ public class File_Managment {
 
 
     }
+    private static void writeLoginToFile(Login login, String pathToFile){
+
+        Path p = Path.of(pathToFile);
+
+
+        if (Files.exists(p))
+    }
+
+
 
 
 }
