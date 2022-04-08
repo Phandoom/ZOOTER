@@ -29,7 +29,8 @@ public class File_Managment {
         Characters c2 = new Characters(2, " Amalia ", 1, Gender.female, " Archer");
         Characters c3 = new Characters(3, " Ezecial ", 4.5, Gender.male, " Assasin");
 
-        Login l = new Login("bkdk", "12345");
+        Login l1 = new Login("bkdk", "12345");
+
 
         System.out.println("\nWrite character data to file: ");
         writeCharactertoFile(c1, pathAndFilenameC1);
@@ -37,7 +38,7 @@ public class File_Managment {
         writeCharactertoFile(c3, pathAndFilenameC3);
 
         System.out.println("\nWrite login data to file:  ");
-        writeLoginToFile(l, pathAndFilenameL);
+        writeLoginToFile(l1, pathAndFilenameL);
 
         System.out.println("\n\nRead character data from file");
         Characters c_1 = readCharacterFromFile(pathAndFilenameC1);
@@ -60,9 +61,9 @@ public class File_Managment {
         }
 
         System.out.println("\n\nRead Login data from file");
-        Login l1 = readLoginFromFile(pathAndFilenameL);
-        if (l1 != null) {
-            System.out.println(l);
+        Login l2 = readStringFromLogin(pathAndFilenameL);
+        if (l2 != null) {
+            System.out.println(l2);
         } else {
             System.out.println("No data available");
 
@@ -152,8 +153,55 @@ public class File_Managment {
         Path p = Path.of(pathToFile);
 
 
-        if (Files.exists(p))
+        if (Files.exists(p)){
+            System.out.println("The data already exists");
+            return;
+        }
+
+        try {
+
+            String s = "";
+            s += login.getUsername() + "\n";
+            s += login.getPassword() + "\n";
+
+            Files.writeString(p, s);
+
+        }catch (IOException e){
+            System.err.println("Couldn't write data " + e);
+        }
     }
+
+    private static Login readStringFromLogin(String path){
+
+        Path p = Path.of(path);
+
+
+        if(Files.exists(p)){
+
+            try {
+                return convertStringToLogin(Files.readAllLines(p));
+            }
+            catch(IOException e){
+                System.out.println("Es trat ein Problem beim Lesen der Datei auf.");
+            }
+        }
+        else{
+            System.out.println("Die Datei existiert nicht!");
+        }
+        return null;
+    }
+
+    private static Login convertStringToLogin(List<String> lines){
+
+        Login l = new Login();
+
+
+        l.setUsername(lines.get(0));
+        l.setPassword(lines.get(1));
+
+        return l;
+    }
+
 
 
 
