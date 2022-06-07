@@ -17,14 +17,18 @@ public class Game extends Canvas implements Runnable{
     private Thread thread;
     private Handler handler;
     private SpriteSheet ss;
+    private SpriteSheet css;
+    private int chara;
 
     private BufferedImage level = null;
     private BufferedImage sprite_sheet = null;
+    private BufferedImage character_sheet = null;
     private BufferedImage grass = null;
 
     private Camera camera;
 
-    public Game(){
+    public Game(int i){
+        this.chara = i;
         playerWindow.createWindow(this);
         start();
 
@@ -35,8 +39,10 @@ public class Game extends Canvas implements Runnable{
         BufferedImageLoader loader = new BufferedImageLoader();
         level = loader.loadImage("/Field2.png");
         sprite_sheet = loader.loadImage("/Spritesheet.png");
+        character_sheet = loader.loadImage("/Character_Spritesheet.png");
 
         ss = new SpriteSheet(sprite_sheet);
+        css = new SpriteSheet(character_sheet);
 
         grass = ss.grabImage(1,1,32, 32);
 
@@ -50,6 +56,7 @@ public class Game extends Canvas implements Runnable{
         thread.start();
 
     }
+    
 
     private void stop(){
         isRunning = false;
@@ -61,44 +68,44 @@ public class Game extends Canvas implements Runnable{
 
     }
 
-    public static void main(){
-        new Game();
+    public static void main(int i){
+        new Game(i);
     }
 
     @Override
     public void run() {
-    this.requestFocus();
-    long lastTime = System.nanoTime();
-    double amountOfTickets = 60;
-    double ns = 1000000000 / amountOfTickets;
-    double delta = 0;
-    long timer = System.currentTimeMillis();
-    int frames = 0;
-    while (isRunning){
-        long now = System.nanoTime();
-        delta += (now - lastTime) / ns;
-        lastTime = now;
-        while(delta >= 1){
-            tick();
-            //updates
-            delta--;
-        }
-        render();
-        frames++;
+        this.requestFocus();
+        long lastTime = System.nanoTime();
+        double amountOfTickets = 60;
+        double ns = 1000000000 / amountOfTickets;
+        double delta = 0;
+        long timer = System.currentTimeMillis();
+        int frames = 0;
+        while (isRunning){
+            long now = System.nanoTime();
+            delta += (now - lastTime) / ns;
+            lastTime = now;
+            while(delta >= 1){
+                tick();
+                //updates
+                delta--;
+            }
+            render();
+            frames++;
 
-        if (System.currentTimeMillis() - timer > 1000){
-            timer += 1000;
-            frames = 0;
-            //updates = 0
+            if (System.currentTimeMillis() - timer > 1000){
+                timer += 1000;
+                frames = 0;
+                //updates = 0
+            }
         }
-    }
-    stop();
+        stop();
     }
     public void tick(){
         for (int i = 0; i < handler.object.size(); i++) {
-         if (handler.object.get(i).getId() == ID.Player){
-             camera.tick(handler.object.get(i));
-         }
+            if (handler.object.get(i).getId() == ID.Player){
+                camera.tick(handler.object.get(i));
+            }
 
         }
         handler.tick();
@@ -147,7 +154,7 @@ public class Game extends Canvas implements Runnable{
                     handler.addObject(new Water_full(xx*32, yy*32, ID.Block, ss));
                 }
                 if ((red == 0) && (green == 255) && (blue == 0)){
-                    handler.addObject(new Player(xx*32, yy*32, ID.Player, handler, ss));
+                    handler.addObject(new Player(xx*32, yy*32, ID.Player, handler, ss, css, chara));
                 }
                 if ((red == 255) && (green == 0) && (blue == 0)){
                     handler.addObject(new Enemy(xx*32, yy*32, ID.Enemy, handler, ss));
@@ -195,6 +202,9 @@ public class Game extends Canvas implements Runnable{
 
             }
         }
+    }
+    public void setCharaGame(int i){
+        this.chara = i;
     }
 }
 

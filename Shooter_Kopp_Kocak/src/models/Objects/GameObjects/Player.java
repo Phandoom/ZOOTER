@@ -14,11 +14,25 @@ public class Player extends GameObject {
     private BufferedImage player = null;
     int gold = 0;
     int exp = 0;
+    int chara = 0;
+    SpriteSheet css;
 
-    public Player(int x, int y, ID id, Handler handler, SpriteSheet ss) {
+    public Player(int x, int y, ID id, Handler handler, SpriteSheet ss, SpriteSheet css, int chara) {
         super(x, y, id, ss);
         this.handler = handler;
-        player = ss.grabImage(3, 1, 32, 32);
+        this.chara = chara;
+        this.css = css;
+        switch (chara){
+            case 0:
+                player = css.grabImage(1, 1, 32, 32);
+                break;
+            case 1:
+                player = css.grabImage(2, 1, 32, 32);
+                break;
+            case 2:
+                player = css.grabImage(3, 1, 32, 32);
+                break;
+        }
     }
 
     @Override

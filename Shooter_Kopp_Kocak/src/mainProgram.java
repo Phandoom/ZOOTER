@@ -7,6 +7,7 @@ import models.*;
 import models.Enums.classes;
 import models.Enums.races;
 import models.window.Game;
+import models.window.SelectWindow;
 import models.window.playerWindow;
 
 
@@ -31,7 +32,7 @@ public class mainProgram {
             catch (SQLException e) {
             System.out.println("Datenbankfehler!" + e.getMessage());
         }
-        Game.main();
+        SelectWindow.main();
 
     }
 
