@@ -5,14 +5,20 @@ import models.Enums.races;
 
 public class register {
 
-// fields
+
+    // fields
+    private int _playerId;
     private String  _name;
     private String _password;
     private races _races;
     private classes _classes;
-    private String     _UserId;
+
 
 // getter/setter
+
+    public int getPlayerId() {return _playerId;}
+    public void setPlayerId(int playerId) {this._playerId = playerId;}
+
     public String getName() {
         return this._name;
     }
@@ -41,23 +47,18 @@ public class register {
         this._classes = classes;
     }
 
-    public String getUserId() {
-        return this._UserId;
-    }
-    public void setUserId() {
-        this._UserId = this._name + "_" + this._password;
-    }
 
 //ctors
     public register(){
-        this("", "", races.human, classes.knight);
+        this(0,"", "", races.human, classes.knight);
     }
-    public register(String name, String passwort, races races, classes classes){
+    public register(int playerId, String name, String passwort, races races, classes classes){
+        this.setPlayerId(playerId);
         this.setName(name);
         this.setPassword(passwort);
         this.setRaces(races);
         this.setClasses(classes);
-        this.setUserId();
+
     }
 
 
@@ -67,6 +68,6 @@ public class register {
     @Override
     public String toString() {
         return _name + "\n" + _password + "\n" + _races + "\n" +
-               _classes + "\n" + _UserId;
+               _classes;
     }
 }

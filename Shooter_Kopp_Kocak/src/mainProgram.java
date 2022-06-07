@@ -1,4 +1,5 @@
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 import DB.IRepositoryPlayer;
@@ -19,12 +20,26 @@ public class mainProgram {
         String loginOrRegister;
         boolean ingame = false;
 
-        register user = new register("Burak","Burak123", races.elf, classes.mage);
+        register user = new register(1, "Daniel","Daniel123", races.elf, classes.mage);
 
         IRepositoryPlayer rep;
         try{
             rep = new RepositoryPlayerDB();
             rep.open();
+
+            System.out.println("\nErgebnisse:");
+            List<register> allPlayerResults = rep.getAllPlayers();
+            if (allPlayerResults == null){
+                System.out.println("Noch keine Spielerresultate vorhanden");
+            }
+            else
+            {
+                for (register re : allPlayerResults ){
+                    System.out.println(re);
+                }
+            }
+
+
         }
             catch (ClassNotFoundException e) {
             System.out.println("MySQL Treiber konnte nicht geladen werden!");
